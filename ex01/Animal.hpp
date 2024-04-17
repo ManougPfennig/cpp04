@@ -11,7 +11,7 @@ class Animal {
 	public:
 						Animal( void );
 						Animal(const Animal& toCopy);
-						~Animal( void );
+		virtual			~Animal( void );
 		Animal&			operator=( const Animal& Other );
 
 		virtual	void	makeSound( void ) const;

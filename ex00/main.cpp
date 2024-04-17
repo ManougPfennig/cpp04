@@ -6,9 +6,9 @@
 
 int main(void)
 {
-	WrongAnimal	wrongBasic;
-	WrongCat	wrongKitty;
-	WrongCat	wrongMae(wrongKitty);
+	const WrongAnimal	wrongBasic;
+	const WrongCat	wrongKitty;
+	const WrongCat	wrongMae(wrongKitty);
 
 	std::cout << "\n\n    makeSound function:\n" << std::endl;
 	wrongBasic.makeSound();
