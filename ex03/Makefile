@@ -1,5 +1,5 @@
-NAME = Polymorphisme
-SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+NAME = Materia
+SRCS = main.cpp
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJS = ${SRCS:.cpp=.o}
