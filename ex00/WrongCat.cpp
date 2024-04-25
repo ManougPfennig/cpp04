@@ -34,8 +34,3 @@ WrongCat::~WrongCat(void){
 
 // MEMBRE FUNCTION
 
-void	WrongCat::makeSound(void) const{
-
-	std::cout << "Miaaouuuuu (but in a wrong way)" << std::endl;
-	return ;
-}
