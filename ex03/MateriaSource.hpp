@@ -4,7 +4,7 @@
 # include "IMateriaSource.hpp"
 # include <iostream>
 
-class MateriaSource : IMateriaSource {
+class MateriaSource : public IMateriaSource {
 
 	private:
 		AMateria *_models[4] = {NULL, NULL, NULL, NULL};

@@ -5,7 +5,7 @@
 # include "ICharacter.hpp"
 # include <iostream>
 
-class Ice : AMateria {
+class Ice : public AMateria {
 
 	private:
 
@@ -17,8 +17,9 @@ class Ice : AMateria {
 		Ice &operator=(const Ice&); // OPERATOR OVERRIDE
 
 		// FUNCTION
-		Ice		&clone( void );
-		void	use(ICharacter &target);
+		AMateria*			clone( void ) const;
+		void				use(ICharacter &target) const;
+		std::string const&	getType ( void ) const; //Returns the materia type
 
 };
 

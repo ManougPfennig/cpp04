@@ -16,7 +16,7 @@ MateriaSource::MateriaSource(const MateriaSource& toCopy){
 		if (toCopy._models[i] != NULL)
 		{
 			delete this->_models[i];
-			this->_models[i] = toCopy._models[i].clone();
+			this->_models[i] = toCopy._models[i]->clone();
 		}
 	return ;
 }
@@ -25,6 +25,9 @@ MateriaSource::MateriaSource(const MateriaSource& toCopy){
 
 MateriaSource::~MateriaSource( void ){
 
+	for (int i = 0; i <= 3; i++)
+		if (this->_models[i])
+			delete this->_models[i];
 	std::cout << "MateriaSource destructed: " << std::endl;
 	return ;
 }
@@ -41,7 +44,7 @@ MateriaSource	&MateriaSource::operator=( const MateriaSource& Other){
 			if (Other._models[i] != NULL)
 			{
 				delete this->_models[i];
-				this->_models[i] = Other._models[i].clone();
+				this->_models[i] = Other._models[i]->clone();
 			}
 	}
 	return (*this);
@@ -56,7 +59,7 @@ void MateriaSource::learnMateria(AMateria *m){
 		if (this->_models[i] == NULL)
 		{
 			this->_models[i] = m->clone();
-			std::cout << "MateriaSource: Materia learned successfully" << std::endl;
+			std::cout << "MateriaSource: Materia learned successfully: " << m->getType() << std::endl;
 			return ;
 		}
 	// display message if no slots are available
@@ -67,10 +70,10 @@ void MateriaSource::learnMateria(AMateria *m){
 AMateria* MateriaSource::createMateria(std::string const & type){
 
 	for (int i = 0; i <= 3; i++)
-		if (this->_models[i] && this->_models.getType() == type)
+		if (this->_models[i] && this->_models[i]->getType() == type)
 		{
 			std::cout << "MateriaSource: type created successfully: " << type << std::endl;
-			return (this->_models[i].clone());
+			return (this->_models[i]->clone());
 		}
 	std::cout << "MateriaSource: Unknown Materia type: " << type << std::endl;
 	return (NULL);

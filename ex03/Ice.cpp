@@ -12,7 +12,7 @@ Ice::Ice(void){
 Ice::Ice(const Ice& toCopy){
 
 	std::cout << "Ice copy assignement operator called" << std::endl;
-	this->_type = Other.getType();
+	this->_type = toCopy.getType();
 	return ;
 }
 
@@ -36,18 +36,18 @@ Ice	&Ice::operator=( const Ice& Other){
 
 // MEMBER FUNCTIONS
 
-std::string const &Ice::getType( void ){
+std::string const& Ice::getType( void ) const{
 
 	return (this->_type);
 }
 
-Ice&	Ice::clone( void ){
+AMateria*	Ice::clone( void ) const{
 
 	std::cout << "Ice cloning called" << std::endl;
 	return (new Ice(*this));
 }
 
-Ice&	Ice::use(ICharacter& target){
+void	Ice::use(ICharacter& target) const{
 
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 	return ;

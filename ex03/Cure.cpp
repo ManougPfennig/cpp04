@@ -12,7 +12,7 @@ Cure::Cure(void){
 Cure::Cure(const Cure& toCopy){
 
 	std::cout << "Cure copy assignement operator called" << std::endl;
-	this->_type = Other.getType();
+	this->_type = toCopy.getType();
 	return ;
 }
 
@@ -36,18 +36,18 @@ Cure	&Cure::operator=( const Cure& Other){
 
 // MEMBER FUNCTIONS
 
-std::string const &Cure::getType( void ){
+std::string const& Cure::getType( void ) const{
 
 	return (this->_type);
 }
 
-Cure&	Cure::clone( void ){
+AMateria*	Cure::clone( void ) const{
 
 	std::cout << "Cure cloning called" << std::endl;
 	return (new Cure(*this));
 }
 
-Cure&	Cure::use(ICharacter& target){
+void	Cure::use(ICharacter& target) const{
 
 	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 	return ;

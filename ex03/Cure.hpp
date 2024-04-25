@@ -5,7 +5,7 @@
 # include "ICharacter.hpp"
 # include <iostream>
 
-class Cure : AMateria {
+class Cure : public AMateria {
 
 	private:
 
@@ -17,8 +17,9 @@ class Cure : AMateria {
 		Cure &operator=(const Cure&); // OPERATOR OVERRIDE
 
 		// FUNCTION
-		Cure	&clone( void );
-		void	use(ICharacter &target);
+		AMateria*			clone( void ) const;
+		void				use(ICharacter &target) const;
+		std::string const&	getType ( void ) const; //Returns the materia type
 
 };
 

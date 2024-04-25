@@ -2,7 +2,9 @@
 # define AMATERIA_H
 
 # include <iostream>
-# include "ICharacter.hpp"
+// # include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria {
 
@@ -14,12 +16,12 @@ class AMateria {
 						AMateria( void );
 						AMateria(std::string const& type);
 						AMateria(const AMateria& toCopy);
-	virtual				~AMateria() = 0;
+	virtual				~AMateria() {};
 	AMateria&			operator=( const AMateria& Other );
 
-	virtual std::string const&	getType( void ) const; //Returns the materia type
-	virtual AMateria*			clone( void ) const; // returns a new copy of the materia
-	virtual void				use(ICharacter& target) const; // use of the materia on target
+	virtual std::string const &	getType (void ) const = 0; //Returns the materia type
+	virtual AMateria*			clone( void ) const = 0; // returns a new copy of the materia
+	virtual void				use(ICharacter& target) const = 0; // use of the materia on target
 
 };
 

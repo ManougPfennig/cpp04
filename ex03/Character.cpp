@@ -24,7 +24,7 @@ Character::Character(const Character& toCopy){
 	// Clone inventory
 	for (int i = 0; i < 4; i++)
 		if (toCopy._inventory[i] != NULL)
-			this->_inventory[i] = toCopy._inventory[i].clone();
+			this->_inventory[i] = toCopy._inventory[i]->clone();
 	return ;
 }
 
@@ -54,8 +54,8 @@ Character	&Character::operator=( const Character& Other){
 				if (this->_inventory[i])
 					delete this->_inventory[i];
 				this->_inventory[i] = NULL;
-				if (toCopy._inventory[i])
-					this->_inventory[i] = toCopy._inventory[i].clone();
+				if (Other._inventory[i])
+					this->_inventory[i] = Other._inventory[i]->clone();
 			}
 	}
 	return (*this);
@@ -71,9 +71,9 @@ void Character::equip(AMateria* m) {
 
 	// check if this specific Materia is already equipped
 	for (int i = 0; i <= 3; i++)
-		if (this->_inventory[i] && &(this->_inventory[i]) == m)
+		if (this->_inventory[i] && (this->_inventory[i]) == m)
 		{
-			std::cout << this->getName << ": item cannot be equipped twice" << std::endl;
+			std::cout << this->getName() << ": items cannot be equipped twice" << std::endl;
 			return ;
 		}
 	// look for an empty slot to store the Materia in
@@ -81,10 +81,7 @@ void Character::equip(AMateria* m) {
 		if (this->_inventory[i] == NULL)
 		{
 			this->_inventory[i] = m;
-			std::cout << m->getType() << " added to " << this->getName() << "'s inventory";
-			if (i == 3)
-				std::cout << " (now full)";
-			std::cout << std::endl;
+			std::cout << m->getType() << " added to " << this->getName() << "'s inventory" << std::endl;
 			return ;
 		}
 	// display message if no empty slot has been found
@@ -95,10 +92,10 @@ void Character::equip(AMateria* m) {
 void Character::unequip(int idx) {
 
 	// check if index is valid and if the slot contains a Materia
-	if ((i >= 0 && i <= 3) && this->_inventory[i])
+	if ((idx >= 0 && idx <= 3) && this->_inventory[idx])
 	{
-		std::cout << this->getName() << " unequiped " << this->_inventory[i].getType() << std::endl;
-		this->_inventory[i] = NULL;
+		std::cout << this->getName() << " unequiped " << this->_inventory[idx]->getType() << std::endl;
+		this->_inventory[idx] = NULL;
 		return ;
 	}
 	// display message if no Materia has been unequipped
@@ -106,15 +103,21 @@ void Character::unequip(int idx) {
 	return ;
 }
 
-void Character::use(int idx, Character& target) {
+void Character::use(int idx, ICharacter& target) {
 
-	// check if index is valid and if the slot contains a Materia
-	if ((i >= 0 && i <= 3) && this->_inventory[i])
+	// check if index is valid
+	// check if the slot contains a Materia
+	if (idx < 0 || idx > 3)
 	{
-		std::cout << this->getName() << " uses " << this->_inventory[i].getType() << " on " << target.getName() << std::endl;
-		this->_inventory[i].use(target);
-		delete this->_inventory[i];
-		this->_inventory[i] = NULL;
+		std::cout << this->getName() << ": invalid inventory slot" << std::endl;
+		return ;
+	}
+	if (this->_inventory[idx])
+	{
+		std::cout << this->getName() << " uses " << this->_inventory[idx]->getType() << " on " << target.getName() << std::endl;
+		this->_inventory[idx]->use(target);
+		delete this->_inventory[idx];
+		this->_inventory[idx] = NULL;
 		return ;
 	}
 	// display message if no Materia has been used

@@ -1,5 +1,6 @@
 NAME = Materia
-SRCS = main.cpp
+SRCS =	main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp \
+		ICharacter.cpp IMateriaSource.cpp MateriaSource.cpp
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
 OBJS = ${SRCS:.cpp=.o}
